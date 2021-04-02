@@ -3,7 +3,7 @@
 Simple service to expose [GRIB2](http://en.wikipedia.org/wiki/GRIB) wind forecast data
 from the [Canadian Centre for Climate Services](https://weather.gc.ca/)
 (25km 12 hourly model from [here](https://dd.weather.gc.ca/model_gem_global/25km/grib2/lat_lon/)) as
-JSON. The Canadian model is produced 2 times a day and provide a prediction for every 3 hours - we
+JSON. The Canadian model is produced 2 times a day and provides a prediction for every 3 hours - we
 then grab the last most recent (so it should update every 3 hours or so).
 
 Can be consumed by Dan Wild's [leaflet-velocity layer](https://github.com/danwild/leaflet-velocity).
