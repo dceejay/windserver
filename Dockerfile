@@ -1,17 +1,17 @@
 FROM node:lts-slim
 
 RUN apt-get update \
-  && mkdir -p /usr/share/man/man1 \
   && mkdir -p /app \
+  && mkdir -p /usr/share/man/man1 \
   && apt-get install -y openjdk-8-jre-headless
-
-ENV JAVA_HOME=/usr
 
 WORKDIR /app
 
 COPY ./package.json .
 RUN npm i
 COPY . .
+
+ENV JAVA_HOME=/usr
 
 EXPOSE 7000
 
