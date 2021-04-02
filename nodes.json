@@ -1,0 +1,89 @@
+[
+    {
+        "id": "1b31d8d2.28fc17",
+        "type": "http request",
+        "z": "d3236f0.2a14a9",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:7000/latest",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 270,
+        "y": 1060,
+        "wires": [
+            [
+                "406eb3ba.8dbffc"
+            ]
+        ]
+    },
+    {
+        "id": "7c9981b9.8a3f48",
+        "type": "inject",
+        "z": "d3236f0.2a14a9",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 120,
+        "y": 1060,
+        "wires": [
+            [
+                "1b31d8d2.28fc17"
+            ]
+        ]
+    },
+    {
+        "id": "406eb3ba.8dbffc",
+        "type": "function",
+        "z": "d3236f0.2a14a9",
+        "name": "create wind layer",
+        "func": "\n// var a = msg.payload.filter(function(e) {\n//     return e.header.forecastTime == 12;\n// });\n\n\nvar ds = msg.payload[0].header.refTime.split(\":\")[0].split(\"-\");\nvar dd = ds[2].split(\"T\");\nvar d =  msg.payload[0].header.forecastTime+\":00 \"+dd[0]+\"/\"+ds[1]+\"/\"+ds[0];\nvar v = {\n\tdisplayValues: true,\n\tdisplayOptions: {\n\t\tvelocityType: d,\n\t\tposition: 'bottomright',\n\t\temptyString: 'No wind data',\n\t\tshowCardinal: true,\n\t\tspeedUnit: \"k/h\",\n\t\tangleConvention: \"meteoCCW\"\n\t},\n\tdata: msg.payload,\n\tmaxVelocity: 15,\n\tcolorScale: [\n\t\t\"rgb(0,0,0)\",\n\t\t\"rgb(40,0,0)\",\n\t\t\"rgb(80,10,0)\",\n\t\t\"rgb(140,20,0)\"\n\t]\n}\n\nvar m = {overlay:\"world wind\", velocity:v};\n\nmsg.payload = {command:{map:m}};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1060,
+        "wires": [
+            [
+                "38cc22a2.f99bee",
+                "687e65f9.9fe5ec",
+                "457fd12a.8d2a7"
+            ]
+        ]
+    },
+    {
+        "id": "457fd12a.8d2a7",
+        "type": "worldmap",
+        "z": "d3236f0.2a14a9",
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "deg",
+        "showgrid": "true",
+        "allowFileDrop": "true",
+        "path": "/worldmap",
+        "x": 660,
+        "y": 1060,
+        "wires": []
+    }
+]

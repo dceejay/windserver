@@ -1,0 +1,23 @@
+{
+  "name": "wind-server",
+  "version": "0.1.0",
+  "description": "Service to expose Grib2 wind forecast data from Canadian Metro Service as JSON",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wind-js",
+    "node",
+    "grib2"
+  ],
+  "author": "dceejay@mail.com",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "moment": "^2.12.0",
+    "request": "^2.88.2"
+  }
+}
