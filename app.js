@@ -6,6 +6,7 @@ var fs = require('fs');
 var cors = require('cors');
 var app = express();
 var port = process.env.PORT || 7000;
+var lasttime = "";
 process.env.JAVA_HOME = "/usr";
 
 // cors config
@@ -73,17 +74,24 @@ function run(t) {
     const urlv = 'https://dd.weather.gc.ca/model_gem_global/25km/grib2/lat_lon/00/' + h + '/CMC_glb_VGRD_TGL_10_latlon.24x.24_' + d + '00_P' + h + '.grib2';
     const pathv = '/tmp/v.grb2'
 
-    download(urlu, pathu, () => {
-        console.log('✅ Fetched U');
-        download(urlv, pathv, () => {
-            console.log('✅ Fetched V');
-            joingrib(() => {
-                convert(() => {
-                    fs.writeFileSync("json-data/last", d+":"+h);
+    console.log(d+":"+h);
+    if (h !== lasttime) { // only get if time has moved or we failed last time.
+        download(urlu, pathu, () => {
+            console.log('✅ Fetched U');
+            download(urlv, pathv, () => {
+                console.log('✅ Fetched V');
+                joingrib(() => {
+                    convert(() => {
+                        fs.writeFileSync("json-data/last", d+":"+h);
+                        lasttime = h;
+                    });
                 });
-            });
+            })
         })
-    })
+    }
+    else {
+        console.log("▢ We're still OK")
+    }
 }
 
 function joingrib(cb) {
@@ -120,6 +128,6 @@ function checkPath(path, mkdir) {
 
 setInterval(function() {
     run(moment.utc());
-}, 3600000);
+}, 1200000);    // Check every 20 mins
 
 run(moment.utc());
