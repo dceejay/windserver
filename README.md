@@ -38,7 +38,7 @@ npm start
 - **/example** returns a Node-RED example json flow file that you can import and deploy.
 - **/alive** health check url, returns simple message.
 
-Note: you may need to update the url reference in the http reques node to point the server and port where the container is running.
+**Note**: you may need to update the url reference in the example http request node to point the server and port where your container is running.
 
 ### License
 MIT License (MIT)
