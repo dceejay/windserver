@@ -74,8 +74,9 @@ function run(t) {
     const urlv = 'https://dd.weather.gc.ca/model_gem_global/25km/grib2/lat_lon/00/' + h + '/CMC_glb_VGRD_TGL_10_latlon.24x.24_' + d + '00_P' + h + '.grib2';
     const pathv = '/tmp/v.grb2'
 
-    console.log(d+":"+h);
-    if (h !== lasttime) { // only get if time has moved or we failed last time.
+    // only get if it's past 4am and time slot has moved on or we failed last time.
+    if (t.hour() >= 4 && h !== lasttime) {
+        console.log(d+":"+h);
         download(urlu, pathu, () => {
             console.log('✅ Fetched U');
             download(urlv, pathv, () => {
@@ -88,9 +89,6 @@ function run(t) {
                 });
             })
         })
-    }
-    else {
-        console.log("▢ We're still OK")
     }
 }
 
@@ -128,6 +126,6 @@ function checkPath(path, mkdir) {
 
 setInterval(function() {
     run(moment.utc());
-}, 1200000);    // Check every 20 mins
+}, 600000);    // Check every 10 mins
 
 run(moment.utc());
