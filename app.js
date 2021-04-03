@@ -68,8 +68,8 @@ const download = (url, path, callback) => {
 }
 
 function run(t) {
-    const h = ("" + (parseInt(t.hour() / 3) * 3)).padStart(3,"0");
-    const d = t.format("YYYYMMDD");
+    let h = ("" + (parseInt(t.hour() / 3) * 3)).padStart(3,"0");
+    let d = t.format("YYYYMMDD");
 
     const urlu = 'https://dd.weather.gc.ca/model_gem_global/25km/grib2/lat_lon/00/' + h + '/CMC_glb_UGRD_TGL_10_latlon.24x.24_' + d + '00_P' + h + '.grib2';
     const pathu = '/tmp/u.grb2'
@@ -77,7 +77,12 @@ function run(t) {
     const pathv = '/tmp/v.grb2'
 
     // only get if it's past 4am and time slot has moved on or we failed last time.
-    if (t.hour() >= 4 && h !== lasttime) {
+    if (h !== lasttime) {
+        // As the new model isn't published until 4 am use the previous days prediction until then
+        if (t.hour() < 4) {
+            d = t.subtract(1,'d').format('YYYYMMDD');
+            h = h + 24;
+        }
         console.log("🕑 "+d+":"+h);
         download(urlu, pathu, () => {
             console.log('✅ Fetched U');
