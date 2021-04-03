@@ -22,9 +22,11 @@ var corsOptions = {
     }
 };
 
-app.listen(port, function(err) {
-    console.log("🌎 Running server on port "+ port);
-});
+setTimeout(() => {
+    app.listen(port, function(err) {
+        console.log("🌎 Running server on port "+ port);
+    });
+},10000);
 
 app.get('/', cors(corsOptions), function(req, res) {
     res.send('<h3>windserver</h3><p>Go to <b>/latest</b> for wind data</p><p>or <b>/last</b> to get datetime of latest file</p><p><b>/example</b> to get an example Node-RED flow file,</p><p>or <b>/alive</b> for a simple health check.</b></p>');
