@@ -23,7 +23,7 @@ var corsOptions = {
 };
 
 app.listen(port, function(err) {
-    console.log("running server on port "+ port);
+    console.log("🌎 Running server on port "+ port);
 });
 
 app.get('/', cors(corsOptions), function(req, res) {
@@ -76,7 +76,7 @@ function run(t) {
 
     // only get if it's past 4am and time slot has moved on or we failed last time.
     if (t.hour() >= 4 && h !== lasttime) {
-        console.log(d+":"+h);
+        console.log("🕑 "+d+":"+h);
         download(urlu, pathu, () => {
             console.log('✅ Fetched U');
             download(urlv, pathv, () => {
