@@ -81,7 +81,7 @@ function run(t) {
         // As the new model isn't published until 4 am use the previous days prediction until then
         if (t.hour() < 4) {
             d = t.subtract(1,'d').format('YYYYMMDD');
-            h = h + 24;
+            h = (parseInt(h) + 24).padStart(3,"0");
         }
         console.log("🕑 "+d+":"+h);
         download(urlu, pathu, () => {
