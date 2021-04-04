@@ -1,23 +1,23 @@
 {
-    "name": "windserver",
-    "version": "1.0.0",
-    "description": "Service to expose Grib2 wind forecast data from Canadian Metro Service as JSON",
-    "main": "app.js",
-    "scripts": {
-      "start": "node app.js",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-      "windserver",
-      "node",
-      "grib2"
-    ],
-    "author": "dceejay@mail.com",
-    "license": "MIT",
-    "dependencies": {
-      "cors": "^2.8.5",
-      "express": "^4.17.1",
-      "moment": "^2.29.1",
-      "request": "^2.88.2"
-    }
+  "name": "windserver",
+  "version": "1.0.0",
+  "description": "Service to expose Grib2 wind forecast data from Canadian Metro Service as JSON",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "windserver",
+    "node",
+    "grib2"
+  ],
+  "author": "dceejay@mail.com",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dayjs": "~1.10.4",
+    "express": "^4.17.1",
+    "request": "^2.88.2"
+  }
 }

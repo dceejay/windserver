@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 var express = require("express");
-var moment = require("moment");
+var dayjs = require("dayjs");
+var utc = require('dayjs/plugin/utc');
 var request = require('request');
 var fs = require('fs');
 var cors = require('cors');
 var app = express();
 var port = process.env.PORT || 7000;
 var lasttime = "";
+dayjs.extend(utc)
 process.env.JAVA_HOME = "/usr";
 
 // cors config
@@ -132,7 +134,7 @@ function checkPath(path, mkdir) {
 }
 
 setInterval(function() {
-    run(moment.utc());
+    run(dayjs.utc());
 }, 600000);    // Check every 10 mins
 
-run(moment.utc());
+run(dayjs.utc());
