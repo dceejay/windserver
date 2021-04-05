@@ -87,9 +87,9 @@ function run(t) {
         }
         console.log("🕑 "+d+":"+h);
         download(urlu, pathu, () => {
-            console.log('✅ Fetched U');
+            process.stdout.write('✅ Fetched U, ');
             download(urlv, pathv, () => {
-                console.log('✅ Fetched V');
+                process.stdout.write('Fetched V, ');
                 joingrib(() => {
                     convert(() => {
                         fs.writeFileSync("json-data/last", d+":"+h);
@@ -107,7 +107,7 @@ function joingrib(cb) {
         {maxBuffer: 500 * 1024},
         function (error, stdout, stderr) {
             if (error) { console.log('❌ join error: ' + error); }
-            else { console.log("✅ Joined U+V"); if (cb) {cb()} }
+            else { process.stdout.write("Joined U+V, "); if (cb) {cb()} }
         });
 }
 
@@ -118,7 +118,7 @@ function convert(cb) {
         {maxBuffer: 500 * 1024},
         function (error, stdout, stderr) {
             if (error) { console.log('❌ convert error: ' + error); }
-            else { console.log("✅ Converted to JSON"); if (cb) {cb()} }
+            else { console.log("Converted to JSON."); if (cb) {cb()} }
         });
 }
 
