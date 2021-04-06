@@ -80,10 +80,13 @@ function run(t) {
 
     // only get if it's past 4am and time slot has moved on or we failed last time.
     if (h !== lasttime) {
-        // As the new model isn't published until 4 am use the previous days prediction until then
+        // As the new model isn't published until 4 am don't bother until then
         if (t.hour() < 4) {
-            d = t.subtract(1,'d').format('YYYYMMDD');
-            h = ((parseInt(h) + 24)+"").padStart(3,"0");
+            // d = t.subtract(1,'d').format('YYYYMMDD');
+            // h = ((parseInt(h) + 24)+"").padStart(3,"0");
+            lasttime = h;
+            console.log("💤 "+d+":"+h);
+            return;
         }
         console.log("🕑 "+d+":"+h);
         download(urlu, pathu, () => {
