@@ -84,7 +84,7 @@ function run(t) {
         if (t.hour() < 4) {
             // d = t.subtract(1,'d').format('YYYYMMDD');
             // h = ((parseInt(h) + 24)+"").padStart(3,"0");
-            lasttime = h;
+            // lasttime = h;
             console.log("💤 "+d+":"+h);
             return;
         }
