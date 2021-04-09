@@ -88,7 +88,7 @@ function run(t) {
             console.log("💤 "+d+":"+h);
             return;
         }
-        console.log("🕑 "+d+":"+h);
+        console.log("🕑 "+t.format('HH:mm:ss')+" - "+d+":"+h);
         download(urlu, pathu, () => {
             process.stdout.write('✅ Fetched U, ');
             download(urlv, pathv, () => {
