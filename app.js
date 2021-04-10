@@ -109,7 +109,7 @@ function joingrib(cb) {
     child = exec('cat /tmp/u.grb2 /tmp/v.grb2 > /tmp/uv.grb2',
         {maxBuffer: 500 * 1024},
         function (error, stdout, stderr) {
-            if (error) { console.log('❌ join error: ' + error); }
+            if (error) { console.log('❌ join error.'); }
             else { process.stdout.write("Joined U+V, "); if (cb) {cb()} }
         });
 }
@@ -120,7 +120,7 @@ function convert(cb) {
     child = exec('converter/bin/grib2json --data --output json-data/uv.json --names --compact /tmp/uv.grb2',
         {maxBuffer: 500 * 1024},
         function (error, stdout, stderr) {
-            if (error) { console.log('❌ convert error: ' + error); }
+            if (error) { console.log('❌ conversion error.'); }
             else { console.log("Converted to JSON."); if (cb) {cb()} }
         });
 }
