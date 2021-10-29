@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:fermium-slim
 
 RUN apt-get update \
   && mkdir -p /app \
