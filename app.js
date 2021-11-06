@@ -73,10 +73,12 @@ function run(t) {
     let h = ("" + (parseInt(t.hour() / 3) * 3)).padStart(3,"0");
     let d = t.format("YYYYMMDD");
 
-    const urlu = 'https://dd.weather.gc.ca/model_gem_global/25km/grib2/lat_lon/00/' + h + '/CMC_glb_UGRD_TGL_10_latlon.24x.24_' + d + '00_P' + h + '.grib2';
+    const urlu = 'https://dd.weather.gc.ca/model_gem_global/15km/grib2/lat_lon/00/' + h + '/CMC_glb_UGRD_TGL_10_latlon.15x.15_' + d + '00_P' + h + '.grib2';
     const pathu = '/tmp/u.grb2'
-    const urlv = 'https://dd.weather.gc.ca/model_gem_global/25km/grib2/lat_lon/00/' + h + '/CMC_glb_VGRD_TGL_10_latlon.24x.24_' + d + '00_P' + h + '.grib2';
+    const urlv = 'https://dd.weather.gc.ca/model_gem_global/15km/grib2/lat_lon/00/' + h + '/CMC_glb_VGRD_TGL_10_latlon.15x.15_' + d + '00_P' + h + '.grib2';
     const pathv = '/tmp/v.grb2'
+    // console.log("GetU:"+urlu)
+    // console.log("GetV:"+urlv)
 
     // only get if it's past 4am and time slot has moved on or we failed last time.
     if (h !== lasttime) {
