@@ -44,5 +44,14 @@ npm start
 
 **Note**: you may need to update the url reference in the example http request node to point the server and port where your container is running.
 
+### Building
+
+To rebuild the container fork the project from github and run
+```
+docker build -r -t yourname/windserver .
+then
+docker run -d -p 7000:7000 --name mywindserver yourname/windserver
+```
+
 ### License
 MIT License (MIT)
