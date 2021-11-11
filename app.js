@@ -11,6 +11,14 @@ var lasttime = "";
 dayjs.extend(utc)
 process.env.JAVA_HOME = "/usr";
 
+var type = 'TGL';
+var alt = process.env.altitude || "";
+if (alt.indexOf("mb") != -1) { type = "ISBL"; }
+alt = parseInt( alt || 10);
+if (type == "TGL" && alt != 10 && alt != 40 && alt != 80 && alt != 120) { alt = 10; }
+if (type == "ISBL" && alt%50 != 0) { alt = 300; }
+console.log("💨 Using "+type+'_'+alt);
+
 // cors config
 var whitelist = [
     'http://localhost:3000',
@@ -73,9 +81,9 @@ function run(t) {
     let h = ("" + (parseInt(t.hour() / 3) * 3)).padStart(3,"0");
     let d = t.format("YYYYMMDD");
 
-    const urlu = 'https://dd.weather.gc.ca/model_gem_global/15km/grib2/lat_lon/00/' + h + '/CMC_glb_UGRD_TGL_10_latlon.15x.15_' + d + '00_P' + h + '.grib2';
+    const urlu = 'https://dd.weather.gc.ca/model_gem_global/15km/grib2/lat_lon/00/' + h + '/CMC_glb_UGRD_' + type + '_' + alt + '_latlon.15x.15_' + d + '00_P' + h + '.grib2';
     const pathu = '/tmp/u.grb2'
-    const urlv = 'https://dd.weather.gc.ca/model_gem_global/15km/grib2/lat_lon/00/' + h + '/CMC_glb_VGRD_TGL_10_latlon.15x.15_' + d + '00_P' + h + '.grib2';
+    const urlv = 'https://dd.weather.gc.ca/model_gem_global/15km/grib2/lat_lon/00/' + h + '/CMC_glb_VGRD_' + type + '_' + alt + '_latlon.15x.15_' + d + '00_P' + h + '.grib2';
     const pathv = '/tmp/v.grb2'
     // console.log("GetU:"+urlu)
     // console.log("GetV:"+urlv)

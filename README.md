@@ -22,6 +22,10 @@ To get to production; you should improve upon this or build your own.
 docker run -d -p 7000:7000 --name windserver theceejay/windserver:latest
 ```
 
+You can also set an environment variable called `altitude` that can accept the values 10, 40, 80 or 120 (metres) or a number of millibars that is a multiple of 50 up to 1000. EG: 300mb
+
+Default is 10 (meters - ground level).
+
 #### Node.js
 
 reqires both node.js and java8 to be installed locally
